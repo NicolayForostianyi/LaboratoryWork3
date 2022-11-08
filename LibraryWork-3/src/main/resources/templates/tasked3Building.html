@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+  <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js?cdv=40" type="text/javascript"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css?cdv=40" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Введите следующие параметры</h1>
+<form action="#" th:action="tasked3Building" th:object="${model}"  method="post">
+  <table>
+    <thead>
+      <th></th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Количество програм с ошибками</td>
+        <td th:text ="${numberOfProgramsWithException}"></td>
+      </tr>
+      <tr>
+        <td>Количество програм всего</td>
+        <td th:text ="${numberOfProgramsDeveloped}"></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="row">
+    <div th:each="prod, itemStat : ${programs}"  class="col-md-5 text-left">
+      <table class="table  mt-3" >
+        <tr >
+          <td class="border border-dark text-left">Номер программы:</td>
+          <td class="border border-dark text-left"><input class="border-success" type='text' th:value ="${programs[__${itemStat.index}__].numberOfProgram}"  field="*{programs[__${itemStat.index}__].numberOfProgram}"  th:name='prod.numberOfProgram'></td>
+        </tr>
+        <tr>
+          <td class="border border-dark text-left">Объем программы:</td>
+          <td class="border border-dark text-left"><input class="border-success" type='text' th:value ="${programs[__${itemStat.index}__].scopeOfTheProgram}" field="*{programs[__${itemStat.index}__].scopeOfTheProgram}"  th:name='prod.scopeOfTheProgram'></td>
+        </tr>
+        <tr>
+          <td class="border border-dark text-left">Количество ошибок:</td>
+          <td class="border border-dark text-left"><input class="border-success" type='text' th:value ="${programs[__${itemStat.index}__].numberOfErrors}" field="*{programs[__${itemStat.index}__].numberOfErrors}"  th:name='prod.numberOfErrors'></td>
+        </tr>
+      </table>
+      <p/><p/><p/>
+    </div>
+    <table class="table mt-3 text-center border border-dark text-left">
+      <tr>
+        <td>Объём будующей программы:</td>
+        <td><input class="border-success" type='text' field="*{scopeOfFutureProgram}" th:value="${scopeOfFutureProgram}" th:name='scopeOfFutureProgram'></td>
+      </tr>
+      <tr>
+        <td>Уровень языка программирования :</td>
+        <td><input class="border-success" type='text' field="*{numberLevelOfLang}" th:value="${numberLevelOfLang}" th:name='numberLevelOfLang'></td>
+      </tr>
+    </table>
+    <button class="btn btn-warning border-dark button_phone" name="Сохранить изменения" type="submit" value = "tasked3Building" >Сохранить изменения</button>
+  </div>
+
+</form>
+
+</body>

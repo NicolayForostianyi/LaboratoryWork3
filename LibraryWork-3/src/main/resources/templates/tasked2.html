@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>JS Bin</title>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js?cdv=40" type="text/javascript"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css?cdv=40" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<form action="#" th:action="tasked2" th:object="${model}"  method="post">
+    <div class="row">
+        <div class="col-md-5 text-left">
+            <table>
+                <tr>
+                    <td>Количество входных параметров:</td>
+                    <td><input type='text' field="*{numberOfInputParameters}" th:value="${numberOfInputParameters}" th:name='numberOfInputParameters'></td>
+                </tr>
+                <tr>
+                    <td>Количество выходных параметров:</td>
+                    <td><input type='text' field="*{numberOfOutputParameters}" th:value="${numberOfOutputParameters}" th:name='numberOfOutputParameters'></td>
+                </tr>
+                <tr>
+                    <td>Уровень языка программирования :</td>
+                    <td><input type='text' field="*{numberLevelOfLang}" th:value="${numberLevelOfLang}" th:name='numberLevelOfLang'></td>
+                </tr>
+                <tr>
+                    <td>Количество разработчиков :</td>
+                    <td><input type='text' field="*{numberOfDevelopers}" th:value="${numberOfDevelopers}" th:name='numberOfDevelopers'></td>
+                </tr>
+                <tr>
+                    <td>Величина продуктивности разработчика :</td>
+                    <td><input type='text' field="*{developerProductivity}" th:value="${ndeveloperProductivity}" th:name='developerProductivity'></td>
+                </tr>
+            </table>
+            <button class="button_phone" name="Сохранить изменения" type="submit" value = "tasked2" >Сохранить изменения</button>
+        </div>
+    </div>
+</form>
+
+</body>

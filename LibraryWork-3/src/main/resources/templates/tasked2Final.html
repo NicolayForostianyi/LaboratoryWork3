@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>JS Bin</title>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js?cdv=40" type="text/javascript"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css?cdv=40" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+<button><a href = "\">На главную</a></button>
+<h1>Результаты выполненных вычислений:</h1>
+<table>
+    <tr>
+        <td>количество уровней (i)  :</td>
+        <td th:text ="${i}"></td>
+    </tr>
+    <tr>
+        <td>длина программы (N):</td>
+        <td th:text ="${N}"></td>
+    </tr>
+    <tr>
+        <td>число модулей (K):</td>
+        <td th:text ="${K}" ></td>
+    </tr>
+    <tr>
+        <td>объем программы(V):</td>
+        <td th:text ="${V}" ></td>
+    </tr>
+    <tr>
+        <td>количество команд ассемблера(P):</td>
+        <td th:text ="${P}" ></td>
+    </tr>
+    <tr>
+        <td>календарное время программирования(T_k):</td>
+        <td th:text ="${T_k}" ></td>
+    </tr>
+    <tr>
+        <td>потенциальное количество ошибок(B):</td>
+        <td th:text ="${B}" ></td>
+    </tr>
+    <tr>
+        <td>начальная надёжность ПО (t_n):</td>
+        <td th:text ="${t_n}" ></td>
+    </tr>
+</table>
+
+</body>
