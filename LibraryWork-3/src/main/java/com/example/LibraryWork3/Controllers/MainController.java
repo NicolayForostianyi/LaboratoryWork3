@@ -38,10 +38,10 @@ public class MainController {
         double numberLevel = numberLevelOfLang;
         double n = inputParams+outputParams;
         model.addAttribute("n", n);
-        double V = (n+2)*log2(n+2);
-        model.addAttribute("V", Double.toString(V));
-        double B = Math.pow(V,2)/(3000/numberLevel);
-        model.addAttribute("B",B);
+        double V = (n+2)*log2((n+2));
+        model.addAttribute("V", String.format("%.3f",V));
+        double B = Math.pow(V,2)/(3000*numberLevel);
+        model.addAttribute("B",String.format("%.3f",B));
         return "tasked1Final";
     }
     @GetMapping("/error")
@@ -81,27 +81,27 @@ public class MainController {
         double B=0;
         double t_n=0;
         if(k>8){
-        i = log2(n)/3 +1;
+        i = (log2(n)/3) +1;
         K=n/8+n/64;}
         else{
             K=k;
-            i=0;
+            i=1;
         }
-        N = 220*K+k*log2(K);
+        N = 220*K+K*log2(K);
         V=K*220*log2(48);
         P=3*N/8;
         T_k=3*N/(8*m*v);
         B = V/3000;
         T_k*=8;
         t_n = T_k/(2*ln(B));
-        model.addAttribute("i",i);
-        model.addAttribute("N",N);
-        model.addAttribute("K",K);
-        model.addAttribute("V", V);
-        model.addAttribute("P", P);
-        model.addAttribute("T_k", T_k);
-        model.addAttribute("B", B);
-        model.addAttribute("t_n", t_n);
+        model.addAttribute("i",String.format("%.3f",i));
+        model.addAttribute("N",String.format("%.3f",N));
+        model.addAttribute("K",String.format("%.3f",K));
+        model.addAttribute("V", String.format("%.3f",V));
+        model.addAttribute("P", String.format("%.3f",P));
+        model.addAttribute("T_k", String.format("%.3f",T_k));
+        model.addAttribute("B", String.format("%.3f",B));
+        model.addAttribute("t_n", String.format("%.3f",t_n));
         return "tasked2Final";
     }
     @GetMapping("/tasked3")
@@ -174,7 +174,7 @@ public class MainController {
         return result;
     }
     public static double log2(double x) {
-        return Math.log(x) / Math.log(2);
+        return (Math.log(x)/Math.log(2));
     }
 
     public Model getRating(ArrayList<Program>programs,double numberLevelOfLang, double scopeFutureProgram, Model model ){
@@ -186,21 +186,27 @@ public class MainController {
         double B2 =0;
         double B3 =0;
         double sumV=0;
+        double c_l_k_L_k1=0;
+        double c_l_k_L_k2=0;
+        double c_l_k_L_k3=0;
         double sumB_k_c1 = 0;
         double sumB_k_c2 = 0;
         double sumB_k_c3 = 0;
         for(int i=0;i<programs.size();i++){
             sumV+=programs.get(i).scopeOfTheProgram;
-            sumB_k_c1+=programs.get(i).numberOfErrors/(1/numberLevelOfLang+R1);
-            sumB_k_c2+=programs.get(i).numberOfErrors/(1/numberLevelOfLang*R2);
-            sumB_k_c3+=programs.get(i).numberOfErrors/(1/numberLevelOfLang+R3);
-            R1 = R1 * 0.001*(sumV-sumB_k_c1);
-            R2 = R2 * 0.001*(sumV-sumB_k_c2);
-            R3 = R3 * 0.001*(sumV-sumB_k_c3);
+            c_l_k_L_k1=1/(numberLevelOfLang+R1);
+            c_l_k_L_k2=1/(numberLevelOfLang*R1);
+            c_l_k_L_k3=1/numberLevelOfLang+1/R1;
+            sumB_k_c1+=programs.get(i).numberOfErrors/(1/(numberLevelOfLang+R1));
+            sumB_k_c2+=programs.get(i).numberOfErrors/(1/(numberLevelOfLang*R2));
+            sumB_k_c3+=programs.get(i).numberOfErrors/(1/numberLevelOfLang+1/R3);
+            R1 = R1 * 1+0.001*(sumV-sumB_k_c1);
+            R2 = R2 * 1+0.001*(sumV-sumB_k_c2);
+            R3 = R3 * 1+0.001*(sumV-sumB_k_c3);
         }
-        B1 = sumB_k_c1*scopeFutureProgram;
-        B2 = sumB_k_c2*scopeFutureProgram;
-        B3 = sumB_k_c3*scopeFutureProgram;
+        B1 = c_l_k_L_k1*scopeFutureProgram;
+        B2 = c_l_k_L_k2*scopeFutureProgram;
+        B3 = c_l_k_L_k3*scopeFutureProgram;
         model.addAttribute("R1",R1);
         model.addAttribute("R2",R2);
         model.addAttribute("R3",R3);
